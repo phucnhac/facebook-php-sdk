@@ -806,7 +806,9 @@ abstract class BaseFacebook
     }
 
     $response_params = array();
-    parse_str($access_token_response, $response_params);
+    // Use json_decode instead of parse_str since facebook api returns json string
+    $response_params = json_decode($access_token_response, true);
+    //parse_str($access_token_response, $response_params);
     if (!isset($response_params['access_token'])) {
       return false;
     }
